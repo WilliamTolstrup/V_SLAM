@@ -27,18 +27,23 @@ if(BUILD_TESTING)
 endif()
 
 add_executable(camera src/camera.cpp)
+add_executable(calibration_camera src/calibration_camera.cpp)
 
 # Link against the required dependencies
 ament_target_dependencies(camera rclcpp std_msgs sensor_msgs cv_bridge image_transport)
+ament_target_dependencies(calibration_camera rclcpp std_msgs sensor_msgs cv_bridge image_transport)
 
 # Include OpenCV directories
 target_include_directories(camera PRIVATE ${OpenCV_INCLUDE_DIRS})
+target_include_directories(calibration_camera PRIVATE ${OpenCV_INCLUDE_DIRS})
 
 # Link OpenCV libraries
 target_link_libraries(camera ${OpenCV_LIBRARIES})
+target_link_libraries(calibration_camera ${OpenCV_LIBRARIES})
 
 install(TARGETS
    camera
+   calibration_camera
    DESTINATION lib/${PROJECT_NAME}
  )
 
